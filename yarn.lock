@@ -197,6 +197,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^10.6.0":
+  version: 10.6.0
+  resolution: "@faker-js/faker@npm:10.6.0"
+  checksum: 10c0/ee285d597249a019f3a11b6705d1908616ea9e880207ca4f89e6205dbf7e98abd1129f025f5da19484f5e88f556b0629a4363745ff0bbaf1984ebf54cffde6e3
+  languageName: node
+  linkType: hard
+
 "@fastify/ajv-compiler@npm:^4.0.5":
   version: 4.0.6
   resolution: "@fastify/ajv-compiler@npm:4.0.6"
@@ -687,6 +694,23 @@ __metadata:
     "@nestjs/websockets":
       optional: true
   checksum: 10c0/ccf18a31ce5d1409466f722805cc8bd1f1525ce13ea4a19dfad83a930a35c9de602b9e8e55a6837a46856ee107966763db2bb79b4e2e691bc29f22d2728fd897
+  languageName: node
+  linkType: hard
+
+"@nestjs/mapped-types@npm:*":
+  version: 12.0.0
+  resolution: "@nestjs/mapped-types@npm:12.0.0"
+  peerDependencies:
+    "@nestjs/common": ^10.0.0 || ^11.0.0 || ^12.0.0
+    class-transformer: ^0.4.0 || ^0.5.0
+    class-validator: ^0.13.0 || ^0.14.0 || ^0.15.0
+    reflect-metadata: ^0.1.12 || ^0.2.0
+  peerDependenciesMeta:
+    class-transformer:
+      optional: true
+    class-validator:
+      optional: true
+  checksum: 10c0/6b5d61f402b163b985060b3f8484b04ae6c176a46e3a7b49d006a2b19614b0640b18c327faf494288c3c48ae8fbaf1142b83ecd2c02bc29ca9f7c3b7f7cfc9bf
   languageName: node
   linkType: hard
 
@@ -1432,10 +1456,12 @@ __metadata:
   resolution: "clean-arch@workspace:."
   dependencies:
     "@biomejs/biome": "npm:2.5.11"
+    "@faker-js/faker": "npm:^10.6.0"
     "@nestjs/cli": "npm:^12.0.0"
     "@nestjs/common": "npm:^12.0.1"
     "@nestjs/config": "npm:^12.0.0"
     "@nestjs/core": "npm:^12.0.1"
+    "@nestjs/mapped-types": "npm:*"
     "@nestjs/mau": "npm:^0.2.6"
     "@nestjs/observe": "npm:^0.1.8"
     "@nestjs/platform-fastify": "npm:^12.0.1"
