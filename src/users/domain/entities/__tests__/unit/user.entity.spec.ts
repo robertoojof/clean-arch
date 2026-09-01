@@ -7,11 +7,14 @@ describe('UserEntity unit tests', () => {
   let sut: UserEntity;
 
   beforeEach(() => {
+    UserEntity.validate = vi.fn();
     props = UserDataBuilder({});
     sut = new UserEntity(props);
   });
 
   it('Constructor method', () => {
+    expect(UserEntity.validate).toHaveBeenCalled();
+
     expect(sut.props.name).toEqual(props.name);
     expect(sut.props.email).toEqual(props.email);
     expect(sut.props.password).toEqual(props.password);
@@ -41,15 +44,19 @@ describe('UserEntity unit tests', () => {
     expect(sut.createdAt).toBeInstanceOf(Date);
   });
 
-  it('Update name field', () => {
+  it('Update user', () => {
     const newName = 'New Name';
 
-    sut.updateName(newName);
+    expect(UserEntity.validate).toHaveBeenCalled();
+
+    sut.update(newName);
     expect(sut.name).toEqual(newName);
   });
 
   it('Update password field', () => {
     const newPassword = 'newPassword2';
+
+    expect(UserEntity.validate).toHaveBeenCalled();
 
     sut.updatePassword(newPassword);
     expect(sut.password).toEqual(newPassword);

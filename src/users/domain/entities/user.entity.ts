@@ -21,7 +21,7 @@ export class UserEntity extends Entity<UserProps> {
     this.props.createdAt = this.props.createdAt ?? new Date();
   }
 
-  updateName(name: string): void {
+  update(name: string): void {
     UserEntity.validate({ ...this.props, name });
     this.name = name;
   }
