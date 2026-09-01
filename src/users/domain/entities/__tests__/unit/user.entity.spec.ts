@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { UserDataBuilder } from '@/users/domain/testing/helpers/user-data-building';
 import { UserEntity, UserProps } from '../../user.entity';
 
 describe('UserEntity unit tests', () => {
@@ -7,19 +7,37 @@ describe('UserEntity unit tests', () => {
   let sut: UserEntity;
 
   beforeEach(() => {
-    props = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      senha: faker.internet.password(),
-    };
-
+    props = UserDataBuilder({});
     sut = new UserEntity(props);
   });
 
   it('Constructor method', () => {
     expect(sut.props.name).toEqual(props.name);
     expect(sut.props.email).toEqual(props.email);
-    expect(sut.props.senha).toEqual(props.senha);
+    expect(sut.props.password).toEqual(props.password);
     expect(sut.props.createdAt).toBeInstanceOf(Date);
+  });
+
+  it('Get name field', () => {
+    expect(sut.name).toBeDefined();
+    expect(sut.name).toEqual(props.name);
+    expect(typeof sut.name).toBe('string');
+  });
+
+  it('Get email field', () => {
+    expect(sut.email).toBeDefined();
+    expect(sut.email).toEqual(props.email);
+    expect(typeof sut.email).toBe('string');
+  });
+
+  it('Get senha field', () => {
+    expect(sut.senha).toBeDefined();
+    expect(sut.senha).toEqual(props.password);
+    expect(typeof sut.senha).toBe('string');
+  });
+
+  it('Get createdAt field', () => {
+    expect(sut.createdAt).toBeDefined();
+    expect(sut.createdAt).toBeInstanceOf(Date);
   });
 });
