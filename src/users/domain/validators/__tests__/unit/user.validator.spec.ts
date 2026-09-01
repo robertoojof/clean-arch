@@ -105,4 +105,52 @@ describe('UserValidator unit tests', () => {
       expect(sut.validatedData).toStrictEqual(new UserRules(props));
     });
   });
+
+  describe('PasswordField', () => {
+    it('invalidation cases for password field', () => {
+      // biome-ignore lint/suspicious/noExplicitAny: purposefully testing invalid input
+      let isValid = sut.validate(null as any);
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.password).toStrictEqual([
+        'password should not be empty',
+        'password must be a string',
+        'password must be shorter than or equal to 100 characters',
+      ]);
+
+      isValid = sut.validate({ ...UserDataBuilder({}), password: '' });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.password).toStrictEqual([
+        'password should not be empty',
+      ]);
+
+      // biome-ignore lint/suspicious/noExplicitAny: purposefully testing invalid input
+      isValid = sut.validate({ ...UserDataBuilder({}), password: 10 as any });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.password).toStrictEqual([
+        'password must be a string',
+        'password must be shorter than or equal to 100 characters',
+      ]);
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        password: 'a'.repeat(101),
+      });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.password).toStrictEqual([
+        'password must be shorter than or equal to 100 characters',
+      ]);
+    });
+
+    it('valid cases for password field', () => {
+      const props = UserDataBuilder({});
+      const isValid = sut.validate(props);
+
+      expect(isValid).toBeTruthy();
+      expect(sut.validatedData).toStrictEqual(new UserRules(props));
+    });
+  });
 });
