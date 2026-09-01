@@ -30,14 +30,28 @@ describe('UserEntity unit tests', () => {
     expect(typeof sut.email).toBe('string');
   });
 
-  it('Get senha field', () => {
-    expect(sut.senha).toBeDefined();
-    expect(sut.senha).toEqual(props.password);
-    expect(typeof sut.senha).toBe('string');
+  it('Get password field', () => {
+    expect(sut.password).toBeDefined();
+    expect(sut.password).toEqual(props.password);
+    expect(typeof sut.password).toBe('string');
   });
 
   it('Get createdAt field', () => {
     expect(sut.createdAt).toBeDefined();
     expect(sut.createdAt).toBeInstanceOf(Date);
+  });
+
+  it('Update name field', () => {
+    const newName = 'New Name';
+
+    sut.updateName(newName);
+    expect(sut.name).toEqual(newName);
+  });
+
+  it('Update password field', () => {
+    const newPassword = 'newPassword2';
+
+    sut.updatePassword(newPassword);
+    expect(sut.password).toEqual(newPassword);
   });
 });
