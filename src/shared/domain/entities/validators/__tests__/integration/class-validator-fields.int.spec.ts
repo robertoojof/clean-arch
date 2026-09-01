@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
-import { ValidatorFields } from '../../class-validator-fields';
+import { ClassValidatorFields } from '../../class-validator-fields';
 
 class StubRules {
   @MaxLength(255)
@@ -16,7 +16,7 @@ class StubRules {
   }
 }
 
-class StubValidatorFields extends ValidatorFields<StubRules> {
+class StubValidatorFields extends ClassValidatorFields<StubRules> {
   validate(data: unknown): boolean {
     return super.validate(new StubRules(data));
   }

@@ -1,8 +1,8 @@
 import * as libClassValidator from 'class-validator';
 import { vi } from 'vitest';
-import { ValidatorFields } from '../../class-validator-fields';
+import { ClassValidatorFields } from '../../class-validator-fields';
 
-class StubValidatorFields extends ValidatorFields<{ field: string }> {}
+class StubValidatorFields extends ClassValidatorFields<{ field: string }> {}
 
 describe('ValidatorFields Unit Tests', () => {
   it('should initialize errors and validatedData variables with correct values', () => {
@@ -36,7 +36,7 @@ describe('ValidatorFields Unit Tests', () => {
 
     expect(sut.validate({ field: 'value' })).toBeTruthy();
     expect(spyValidateSync).toHaveBeenCalled();
-    expect(sut.validatedData).toStrictEqual({ field: 'value' }); 
+    expect(sut.validatedData).toStrictEqual({ field: 'value' });
     expect(sut.errors).toMatchObject({});
   });
 });
