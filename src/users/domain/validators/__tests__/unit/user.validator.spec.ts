@@ -53,4 +53,56 @@ describe('UserValidator unit tests', () => {
       expect(sut.validatedData).toStrictEqual(new UserRules(props));
     });
   });
+
+  describe('EmailField', () => {
+    it('invalidation cases for email field', () => {
+      // biome-ignore lint/suspicious/noExplicitAny: purposefully testing invalid input
+      let isValid = sut.validate(null as any);
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.email).toStrictEqual([
+        'email should not be empty',
+        'email must be an email',
+        'email must be a string',
+        'email must be shorter than or equal to 255 characters',
+      ]);
+
+      isValid = sut.validate({ ...UserDataBuilder({}), email: '' });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.email).toStrictEqual([
+        'email should not be empty',
+        'email must be an email',
+      ]);
+
+      // biome-ignore lint/suspicious/noExplicitAny: purposefully testing invalid input
+      isValid = sut.validate({ ...UserDataBuilder({}), email: 10 as any });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.email).toStrictEqual([
+        'email must be an email',
+        'email must be a string',
+        'email must be shorter than or equal to 255 characters',
+      ]);
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        email: `${'a'.repeat(256)}@mail.com`,
+      });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.errors.email).toStrictEqual([
+        'email must be an email',
+        'email must be shorter than or equal to 255 characters',
+      ]);
+    });
+
+    it('valid cases for email field', () => {
+      const props = UserDataBuilder({});
+      const isValid = sut.validate(props);
+
+      expect(isValid).toBeTruthy();
+      expect(sut.validatedData).toStrictEqual(new UserRules(props));
+    });
+  });
 });
